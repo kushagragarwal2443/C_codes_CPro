@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <string.h>
+int place[50];
+int main(void)
+{
+	int N;
+	int count=-1;
+	scanf("%d", &N);
+	int Q;
+	scanf("%d", &Q);
+	int flag;
+	for(int i=1;i<=Q;i++)
+	{
+
+
+
+		int X,Y;
+		char arr[15];
+		scanf("%s %d %d", arr,&X,&Y);
+		char ch = arr[0];
+		if(ch=='F')
+			flag=1;
+		else
+			flag=2;
+
+
+
+		if(flag==1)
+		{
+
+
+			//Now finding in the place array
+			int z1,z2,z11,z22,manhatdistance,leastmanhat=10000,finalX,finalY;
+			if(count==-1)
+			{
+				finalX=-1;
+				finalY=-1;
+			}
+			else
+			{
+			for(int j=0;j<=count;j++)
+			{
+				z1=place[count]/1000;
+				z2=place[count]%1000;
+				
+				z11=z1-X;
+				if(z11<0)
+					z11=-1*z11;
+
+				z22=z2-Y;
+				if(z22<0)
+					z22=-1*z22;
+
+				manhatdistance= z11+z22;
+
+				if(manhatdistance < leastmanhat)
+				{
+					leastmanhat=manhatdistance;
+					finalX=z1;
+					finalY=z2;
+				}
+				else if(manhatdistance==leastmanhat)
+				{
+					if(finalX > z1)
+					{
+						finalX=z1;
+						finalY=z2;
+					}
+					else if(finalX==z1 && finalY>z2)
+					{
+						finalX=z1;
+						finalY=z2;
+					}
+				}
+			}
+			}
+
+			printf("%d %d \n",finalX,finalY);
+		}
+
+		else
+		{
+			//placing the portkeys
+
+
+			place[++count]=1000*X+Y;
+		}
+	}
+	return 0;
+}
